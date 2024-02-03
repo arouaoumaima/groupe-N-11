@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5; /* Light gray background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); /* Remplacez 'chemin_vers_votre_image.jpg' par le chemin de votre image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .login-container {
+            background-color: rgba(255, 255, 255, 0.8); /* Fond blanc semi-transparent */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            position: relative;
+        }
+        .login-container h2 {
+            margin-top: 0;
+            color: #007bff; /* Blue color for the title */
+            font-size: 28px;
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .login-container h2:before {
+            content: "";
+            width: 60px;
+            height: 4px;
+            background-color: #007bff; /* Blue color for the line */
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .login-container form {
+            margin-top: 20px;
+        }
+        .login-container label {
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+            font-weight: bold;
+        }
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            background-color: #f0f0f0; /* Light gray background for input fields */
+            border: none;
+            border-radius: 5px;
+            color: #333;
+            font-size: 16px;
+        }
+        .login-container button {
+            background-color: #007bff; /* Blue color for the button */
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+        .login-container button:hover {
+            background-color: #0056b3; /* Darker blue color on hover */
+        }
+        .login-container a {
+            color: #007bff; /* Blue color for links */
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .login-container a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Welcome Back</h2>
+        <form method="post">
+  
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Login</button>
+        </form>
+        <a href="#">Forgot Password?</a>
+       <p>Don't have an account? <a href="{% url 'gestion:signup' %}" style="color: #007bff;">Sign Up</a></p>
+
+    </div>
+</body>
+</html>

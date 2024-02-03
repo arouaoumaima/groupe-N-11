@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription</title>
+    <style>
+        body {
+          font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5; /* Light gray background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); /* Remplacez 'chemin_vers_votre_image.jpg' par le chemin de votre image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            position: relative;
+        }
+        .container h2 {
+            margin-top: 0;
+            color: #007bff; /* Blue color for the title */
+            font-size: 28px;
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .container h2:before {
+            content: "";
+            width: 60px;
+            height: 4px;
+            background-color: #007bff; /* Blue color for the line */
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: bold;
+        }
+        .error {
+            color: red;
+            font-size: 0.8em;
+        }
+        input[type="text"],
+        input[type="password"],
+        input[type="email"],
+        select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            background-color: #f0f0f0; /* Light gray background for input fields */
+            border: none;
+            border-radius: 5px;
+            color: #333;
+            font-size: 16px;
+        }
+        button.btn-primary {
+            background-color: #007bff; /* Blue color for the button */
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+        button.btn-primary:hover {
+            background-color: #0056b3; /* Darker blue color on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Inscription</h2>
+        <form method="post">
+            {% csrf_token %}
+            
+            <!-- Username Field -->
+            <div class="form-group">
+                <label for="{{ form.username.id_for_label }}">Nom d'utilisateur :</label>
+                {{ form.username }}
+                {% if form.username.errors %}
+                    <div class="error">{{ form.username.errors.as_text }}</div>
+                {% endif %}
+            </div>
+            
+            <!-- Password Field -->
+            <div class="form-group">
+                <label for="{{ form.password1.id_for_label }}">Mot de passe :</label>
+                {{ form.password1 }}
+                {% if form.password1.errors %}
+                    <div class="error">{{ form.password1.errors.as_text }}</div>
+                {% endif %}
+            </div>
+            
+            <!-- Password Confirmation Field -->
+            <div class="form-group">
+                <label for="{{ form.password2.id_for_label }}">Confirmer le mot de passe :</label>
+                {{ form.password2 }}
+                {% if form.password2.errors %}
+                    <div class="error">{{ form.password2.errors.as_text }}</div>
+                {% endif %}
+            </div>
+
+            <!-- Email Field -->
+            <div class="form-group">
+                <label for="{{ form.email.id_for_label }}">Adresse e-mail :</label>
+                {{ form.email }}
+                {% if form.email.errors %}
+                    <div class="error">{{ form.email.errors.as_text }}</div>
+                {% endif %}
+            </div>
+            
+            <!-- Role Selection Field -->
+            <div class="form-group">
+                <label for="{{ form.role.id_for_label }}">Rôle :</label>
+                {{ form.role }}
+                {% if form.role.errors %}
+                    <div class="error">{{ form.role.errors.as_text }}</div>
+                {% endif %}
+            </div>
+            
+            <button type="submit" class="btn btn-primary">S'inscrire</button>
+        </form>
+    </div>
+</body>
+</html>

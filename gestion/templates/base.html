@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Votre Site{% endblock %}</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .cd__main {
+            display: block !important;
+            min-height: 720px;
+        }
+
+       /* Profile Picture */
+.profile-pic {
+    display: inline-block;
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+/* Align the .profile-menu list (containing the profile picture) to the right */
+.navbar-nav.profile-menu {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+/* Ensure the dropdown menu is also aligned to the right */
+.nav-item.dropdown {
+    margin-left: auto;
+}
+
+        .profile-pic img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+        .logo-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.logo-container img {
+    max-width: 100px; /* Adjust the size of the logo */
+    border-radius: 50%; /* Circular logo, remove this line for a square logo */
+}
+
+       
+    </style>
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-" style="background-color: #e3f2fd;">
+        <div class="container-fluid">
+            <div class="logo-container" style="text-align: center; margin-top: 20px;">
+                <img src="https://i.ibb.co/M8brN0c/logo.png" alt="Logo" style="max-width: 100px;">
+            </div>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'gestion:project_list' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        {% if user.userprofile.role == 'STUDENT' %}
+                        <a class="nav-link" href="{% url 'gestion:create_project' %}">Add new project</a>
+                        {% endif %}
+                    </li>
+                  
+                </ul>
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 profile-menu">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <div class="profile-pic">
+                                <img src="https://static.vecteezy.com/system/resources/previews/010/056/184/non_2x/people-icon-sign-symbol-design-free-png.png"
+                                    alt="Profile Picture">
+                            </div>
+                            <!-- You can also use icon as follows: -->
+                            <!--  <i class="fas fa-user"></i> -->
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="{% url 'gestion:profile'  %}"><i class="fas fa-sliders-h fa-fw"></i> Account</a>
+                            
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="{% url 'gestion:login'  %}"><i class="fas fa-sliders-h fa-fw"></i> Logout</a>
+                            
+                                <hr class="dropdown-divider">
+                            </li>
+                           
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <!-- Bootstrap JS, Popper.js, et jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.19.6/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js'></script>
+    <!-- Script JS -->
+    <script>
+        document.querySelectorAll('.dropdown-toggle').forEach(item => {
+            item.addEventListener('click', event => {
+
+                if (event.target.classList.contains('dropdown-toggle')) {
+                    event.target.classList.toggle('toggle-change');
+                }
+                else if (event.target.parentElement.classList.contains('dropdown-toggle')) {
+                    event.target.parentElement.classList.toggle('toggle-change');
+                }
+            })
+        });
+    </script>
+    <!--$%analytics%$-->
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

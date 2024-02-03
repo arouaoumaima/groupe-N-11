@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+<style>
+    body, html {
+        height: 100%;
+    }
+    .container, .row, .col-md-4 {
+        height: 100%;
+    }
+    .card {
+        margin-top: 200px;
+        margin-bottom: auto;
+    }
+    .card-img-top {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        margin: 60px auto;
+    }
+</style>
+{% endblock %}
+
+{% block title %}User Profile{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 offset-md-4">
+            <div class="card text-center">
+                <img src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" class="card-img-top" alt="User Image">
+                <div class="card-body">
+                    {% if user.is_authenticated %}
+                        <h5 class="card-title">{{ user.username }}</h5>
+                        <p class="card-text">Email: {{ user.email }}</p>
+                        <p class="card-text">Role: {{ user.userprofile.role }}</p>
+                        <!-- Additional user info here -->
+                    {% else %}
+                        <h5 class="card-title">Welcome, Guest!</h5>
+                        <p class="card-text">Please log in to view your profile.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<!-- Bootstrap JS, Popper.js, and jQuery -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+{% endblock %}
